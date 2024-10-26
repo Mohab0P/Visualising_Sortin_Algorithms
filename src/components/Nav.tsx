@@ -1,18 +1,44 @@
-import { useEffect } from "react";
 import { useArrayContext } from "../utils/ArrayProvider";
-
+import { BubbleSort } from "../algorithms/BubbleSort";
+import animateDivs from "../utils/AnimateDivs";
 type NavProps = {
- className?: string; // Make className optional
+  className?: string; // Make className optional
 };
-const Nav: React.FC<NavProps> = ({ className }) => {  const {
+const Nav: React.FC<NavProps> = ({ className }) => {
+  const {
     size,
     setSize,
     speed,
     setSpeed,
     sortingAlgorithm,
     setSortingAlgorithm,
-     } = useArrayContext();
-     
+    array,
+    setArray
+  } = useArrayContext();
+
+  const sort = () => {
+    switch (sortingAlgorithm) {
+      case "BubbleSort": {
+        const { dupBlocks, animArr } = BubbleSort(array);
+        animateDivs(dupBlocks, animArr, speed, setArray);
+        break;
+      }
+      case "SelectionSort":
+        console.log("Selection Sort");
+        break;
+      case "MergeSort":
+        console.log("Merge Sort");
+        break;
+      case "QuickSort":
+        console.log("Quick Sort");
+        break;
+      case "HeapSort":
+        console.log("Heap Sort");
+        break;
+      default:
+        console.log("Select a sorting algorithm first!");
+    }
+  };
 
   return (
     <nav className={`w-screen bg-gray-800 grid grid-flow-row ${className} `}>
@@ -38,32 +64,61 @@ const Nav: React.FC<NavProps> = ({ className }) => {  const {
             <span className="relative">r</span>
           </span>
         </span>
-        
+
         <button
-        
-        className={`${sortingAlgorithm=="BubbleSort" ? ' bg-red-500 hover:bg-red-700' : 'bg-blue-500'}   hover:animate-bounce hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-xl transition-all active:scale-95`}          onClick={() => setSortingAlgorithm("BubbleSort")}
+          className={`${
+            sortingAlgorithm == "BubbleSort"
+              ? " bg-red-500 hover:bg-red-700"
+              : "bg-blue-500"
+          }   hover:animate-bounce hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-xl transition-all active:scale-95`}
+          onClick={() => setSortingAlgorithm("BubbleSort")}
         >
           Bubble Sort
         </button>
         <button
-          className={`${sortingAlgorithm=="SelectionSort" ?' bg-red-500 hover:bg-red-700' : 'bg-blue-500' } hover:bg-blue-700 hover:animate-bounce text-white font-bold py-2 px-4 rounded text-xl  transition-all active:scale-95 `}
+          className={`${
+            sortingAlgorithm == "SelectionSort"
+              ? " bg-red-500 hover:bg-red-700"
+              : "bg-blue-500"
+          } hover:bg-blue-700 hover:animate-bounce text-white font-bold py-2 px-4 rounded text-xl  transition-all active:scale-95 `}
           onClick={() => setSortingAlgorithm("SelectionSort")}
         >
           Selection Sort
         </button>
-         <button
-          className={`${sortingAlgorithm=="MergeSort" ? ' bg-red-500 hover:bg-red-700' : 'bg-blue-500'} hover:bg-blue-700 hover:animate-bounce text-white font-bold py-2 px-4 rounded tet-xl  transition-all active:scale-95`}
+        <button
+          className={`${
+            sortingAlgorithm == "MergeSort"
+              ? " bg-red-500 hover:bg-red-700"
+              : "bg-blue-500"
+          } hover:bg-blue-700 hover:animate-bounce text-white font-bold py-2 px-4 rounded tet-xl  transition-all active:scale-95`}
           onClick={() => setSortingAlgorithm("MergeSort")}
         >
           Merge Sort
         </button>
-        <button className={`${sortingAlgorithm=="QuickSort"? 'bg-red-500 hover:bg-red-700':'bg-blue-500'} hover:bg-blue-700 hover:animate-bounce text-white font-bold py-2 px-4 rounded text-xl  transition-all active:scale-95`}           onClick={() => setSortingAlgorithm('QuickSort')}>
+        <button
+          className={`${
+            sortingAlgorithm == "QuickSort"
+              ? "bg-red-500 hover:bg-red-700"
+              : "bg-blue-500"
+          } hover:bg-blue-700 hover:animate-bounce text-white font-bold py-2 px-4 rounded text-xl  transition-all active:scale-95`}
+          onClick={() => setSortingAlgorithm("QuickSort")}
+        >
           Quick Sort
         </button>
-        <button className={`${sortingAlgorithm=="HeapSort" ? 'bg-red-500 hover:bg-red-700':"bg-blue-500"} hover:bg-blue-700 hover:animate-bounce text-white font-bold py-2 px-4 rounded text-xl  transition-all active:scale-95`} onClick={() => setSortingAlgorithm('HeapSort')}>
+        <button
+          className={`${
+            sortingAlgorithm == "HeapSort"
+              ? "bg-red-500 hover:bg-red-700"
+              : "bg-blue-500"
+          } hover:bg-blue-700 hover:animate-bounce text-white font-bold py-2 px-4 rounded text-xl  transition-all active:scale-95`}
+          onClick={() => setSortingAlgorithm("HeapSort")}
+        >
           Heap Sort
         </button>
-        <button className="bg-emerald-600 hover:bg-emerald-800 text-white font-bold py-2 px-4 rounded text-xl underline  transition-all active:scale-95 ">
+        <button
+          className="bg-emerald-600 hover:bg-emerald-800 text-white font-bold py-2 px-4 rounded text-xl underline  transition-all active:scale-95 "
+          onClick={() => sort()}
+        >
           Start
         </button>
       </div>

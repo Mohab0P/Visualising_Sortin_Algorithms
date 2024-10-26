@@ -1,27 +1,26 @@
-import React from "react";
-import { useArrayContext } from "../utils/ArrayProvider";
+import React from 'react';
+import { useArrayContext } from '../utils/ArrayProvider';
 
 type MainProps = {
-  className?: string; // Make className optional
+  className?: string;
 };
-const Main: React.FC<MainProps> = ({ className }) => { 
-   const { size, array, } = useArrayContext();
-  //  const barWidth=100/size;
+
+const Main: React.FC<MainProps> = ({ className }) => {
+  const { size, array } = useArrayContext();
+
   return (
-    <>
-    <div className={`flex w-full h-full items-end ${className}  `}>
+    <div className={`flex w-full h-full items-end ${className}`}>
       {array.length > 0 ? (
         array.map((value, index) => (
           <div
-          key={`${value}-${index}`}
-          className="bg-emerald-600 max-w-56 "
-          style={{
-            height: `${(value / (20 * size)) * 100}%`, // Adjusted for better height calculation
-            // width: `${barWidth}%`, // Adjusted for better width calculation
-            flex: `1 1 ${100 / array.length}%`, // Makes bars responsive
-            margin: "0 1px", // Optional margin to space out the bars
-          }}
-          id={`${index}`}
+            key={`${value}-${index}`}
+            className="bar bg-emerald-600"
+            style={{
+              height: `${(value / (20 * size)) * 100}%`,
+              flex: `1 1 ${100 / array.length}%`,
+              margin: '0 1px',
+            }}
+            id={`${index}`}  // Assign index as id here
           >
             <span className={`${array.length >= 50 ? 'hidden' : 'block'} text-white text-xs`}>
               {value}
@@ -32,8 +31,6 @@ const Main: React.FC<MainProps> = ({ className }) => {
         <p className="text-red-500 text-center w-full">No bars to display</p>
       )}
     </div>
-    {/* <p className="text-center text-white">{array.join()}</p> */}
-        </>
   );
 };
 
