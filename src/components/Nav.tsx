@@ -20,15 +20,23 @@ const Nav: React.FC<NavProps> = ({ className }) => {
     setSorted,
     raing,
     setRaining,
-    sortType,
-    setSortType
+
   } = useArrayContext();
   const [timeTaken, setTimeTaken] = useState<number | null>(null);
+
+  const [sortType, setSortType] = useState(">"); // Default to Ascending
+
+  // Handle change event from the select dropdown
+  const handleSortChange = (e) => {
+    const selectedValue = e.target.value;
+    setSortType(selectedValue);
+  };
+
   const sort = () => {
     switch (sortingAlgorithm) {
       case "BubbleSort": {
     
-        const { dupBlocks, animArr,timeTaken} = BubbleSort(array);
+        const { dupBlocks, animArr,timeTaken} = BubbleSort(array,sortType);
         setTimeTaken(timeTaken);
         animateDivs(dupBlocks, animArr, speed, setArray);
         break;
@@ -128,6 +136,19 @@ const Nav: React.FC<NavProps> = ({ className }) => {
         >
           Heap Sort
         </button>
+    <div>
+      <label htmlFor="sortOrder" className="text-lg">
+        Sort Order:
+      </label>
+      <select id="sortOrder" value={sortType} onChange={handleSortChange}>
+        <option value=">">Ascending</option>
+        <option value="<">Descending</option>
+      </select>
+
+      <div className="mt-2">
+        <p>Selected Sort Type: {sortType === ">" ? "Ascending" : "Descending"}</p>
+      </div>
+    </div>
         <button
           className="bg-emerald-600 hover:bg-emerald-800 text-white font-bold py-2 px-4 rounded text-xl underline  transition-all active:scale-95 "
           onClick={() => sort()}
@@ -175,6 +196,7 @@ const Nav: React.FC<NavProps> = ({ className }) => {
         />
       </div>
       <h1 className="text-blue-500 text-2xl">
+
   {timeTaken !== null ? `Time taken: ${timeTaken.toFixed(2)} milliseconds` : 'Not yet sorted'}
 </h1>
 

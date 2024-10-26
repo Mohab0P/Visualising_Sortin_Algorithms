@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 type SortingAlgorithm = 'none'|'BubbleSort' | 'SelectionSort' | 'InsertionSort' | 'MergeSort' | 'QuickSort' | 'HeapSort';
-type SortType= 'Ascending'|'Descending';
+
 
 const ArrayContext = createContext({
   size: 50,
@@ -12,8 +12,7 @@ const ArrayContext = createContext({
   setSortingAlgorithm: (algorithm: SortingAlgorithm) => {},
   array: [] as number[],
   setArray: (newArray: number[]) => {},
-  sortType: 'Ascending' as SortType,
-  setSortType: (sortType: SortType) => {},
+ 
   sorted: false,
   setSorted: (sorted: boolean) => {},
   raing: false,
@@ -29,7 +28,6 @@ const ArrayProvider: React.FC<{ children: React.ReactNode }> = ({
   const [speed, setSpeed] = useState(15);
   const [sortingAlgorithm,setSortingAlgorithm]=useState<SortingAlgorithm>('none')
   const [array,setArray]=useState<number[]>([])
-  const [sortType,setSortType]=useState<SortType>('Ascending')
   const [sorted,setSorted]=useState <boolean>(false)
   const [raing,setRaining]=useState<boolean>(false)
 
@@ -43,7 +41,7 @@ const ArrayProvider: React.FC<{ children: React.ReactNode }> = ({
 
 
   return (
-    <ArrayContext.Provider value={{ size, setSize, speed, setSpeed, sortingAlgorithm, setSortingAlgorithm,array,setArray,sortType,setSortType,sorted,setSorted ,raing ,setRaining }}>      {children}
+    <ArrayContext.Provider value={{ size, setSize, speed, setSpeed, sortingAlgorithm, setSortingAlgorithm,array,setArray,sorted,setSorted ,raing ,setRaining }}>      {children}
     </ArrayContext.Provider>
   );
 };
