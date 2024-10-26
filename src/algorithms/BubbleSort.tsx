@@ -1,5 +1,4 @@
 // BubbleSort.tsx
-import { useArrayContext } from "../utils/ArrayProvider";
 
 const swap = (array: number[], i: number, j: number) => {
     const temp = array[i];
@@ -8,7 +7,6 @@ const swap = (array: number[], i: number, j: number) => {
   };
   
   export const BubbleSort = (array: number[]) => {
-    const {setRaining,setSorted } = useArrayContext();
     const dupBlocks: number[] = array.slice();
     const animArr: number[][] = []; 
   
