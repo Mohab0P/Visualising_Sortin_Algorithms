@@ -1,6 +1,7 @@
 import { useArrayContext } from "../utils/ArrayProvider";
 import { BubbleSort } from "../algorithms/BubbleSort";
 import animateDivs from "../utils/AnimateDivs";
+import {SelectionSort} from "../algorithms/SelectionSort";
 type NavProps = {
   className?: string; // Make className optional
 };
@@ -32,8 +33,11 @@ const Nav: React.FC<NavProps> = ({ className }) => {
         break;
       }
       case "SelectionSort":
-        console.log("Selection Sort");
+      {
+        const { dupBlocks, animArr } = SelectionSort(array);
+        animateDivs(dupBlocks, animArr, speed, setArray);
         break;
+      }
       case "MergeSort":
         console.log("Merge Sort");
         break;
