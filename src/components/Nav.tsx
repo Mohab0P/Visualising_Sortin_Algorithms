@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { useArrayContext } from "../utils/ArrayProvider";
 import { BubbleSort } from "../algorithms/BubbleSort";
 import animateDivs from "../utils/AnimateDivs";
@@ -22,13 +23,13 @@ const Nav: React.FC<NavProps> = ({ className }) => {
     sortType,
     setSortType
   } = useArrayContext();
-
+  const [timeTaken, setTimeTaken] = useState<number | null>(null);
   const sort = () => {
     switch (sortingAlgorithm) {
       case "BubbleSort": {
     
-        const { dupBlocks, animArr} = BubbleSort(array);
-
+        const { dupBlocks, animArr,timeTaken} = BubbleSort(array);
+        setTimeTaken(timeTaken);
         animateDivs(dupBlocks, animArr, speed, setArray);
         break;
       }
@@ -173,6 +174,10 @@ const Nav: React.FC<NavProps> = ({ className }) => {
           onChange={(e) => setSpeed(parseInt(e.target.value))}
         />
       </div>
+      <h1 className="text-blue-500 text-2xl">
+  {timeTaken !== null ? `Time taken: ${timeTaken.toFixed(2)} milliseconds` : 'Not yet sorted'}
+</h1>
+
     </nav>
   );
 };
