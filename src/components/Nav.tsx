@@ -1,17 +1,21 @@
+import { useEffect } from "react";
 import { useArrayContext } from "../utils/ArrayProvider";
 
-const Nav = () => {
-  const {
+type NavProps = {
+ className?: string; // Make className optional
+};
+const Nav: React.FC<NavProps> = ({ className }) => {  const {
     size,
     setSize,
     speed,
     setSpeed,
     sortingAlgorithm,
     setSortingAlgorithm,
-  } = useArrayContext();
+     } = useArrayContext();
+     
 
   return (
-    <nav className="w-screen bg-gray-800 grid grid-flow-row ">
+    <nav className={`w-screen bg-gray-800 grid grid-flow-row ${className} `}>
       <div className="flex items-center justify-center w-full gap-4 my-5">
         <span className="relative inline-block before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-900">
           <span className="relative text-white text-3xl">
@@ -37,27 +41,26 @@ const Nav = () => {
         
         <button
         
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-xl  transition-all active:scale-95"
-          onClick={() => setSortingAlgorithm("BubbleSort")}
+        className={`${sortingAlgorithm=="BubbleSort" ? ' bg-red-500 hover:bg-red-700' : 'bg-blue-500'}   hover:animate-bounce hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-xl transition-all active:scale-95`}          onClick={() => setSortingAlgorithm("BubbleSort")}
         >
           Bubble Sort
         </button>
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-xl  transition-all active:scale-95 "
+          className={`${sortingAlgorithm=="SelectionSort" ?' bg-red-500 hover:bg-red-700' : 'bg-blue-500' } hover:bg-blue-700 hover:animate-bounce text-white font-bold py-2 px-4 rounded text-xl  transition-all active:scale-95 `}
           onClick={() => setSortingAlgorithm("SelectionSort")}
         >
           Selection Sort
         </button>
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-xl  transition-all active:scale-95"
+         <button
+          className={`${sortingAlgorithm=="MergeSort" ? ' bg-red-500 hover:bg-red-700' : 'bg-blue-500'} hover:bg-blue-700 hover:animate-bounce text-white font-bold py-2 px-4 rounded tet-xl  transition-all active:scale-95`}
           onClick={() => setSortingAlgorithm("MergeSort")}
         >
           Merge Sort
         </button>
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-xl  transition-all active:scale-95"           onClick={() => setSortingAlgorithm('QuickSort')}>
+        <button className={`${sortingAlgorithm=="QuickSort"? 'bg-red-500 hover:bg-red-700':'bg-blue-500'} hover:bg-blue-700 hover:animate-bounce text-white font-bold py-2 px-4 rounded text-xl  transition-all active:scale-95`}           onClick={() => setSortingAlgorithm('QuickSort')}>
           Quick Sort
         </button>
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-xl  transition-all active:scale-95" onClick={() => setSortingAlgorithm('HeapSort')}>
+        <button className={`${sortingAlgorithm=="HeapSort" ? 'bg-red-500 hover:bg-red-700':"bg-blue-500"} hover:bg-blue-700 hover:animate-bounce text-white font-bold py-2 px-4 rounded text-xl  transition-all active:scale-95`} onClick={() => setSortingAlgorithm('HeapSort')}>
           Heap Sort
         </button>
         <button className="bg-emerald-600 hover:bg-emerald-800 text-white font-bold py-2 px-4 rounded text-xl underline  transition-all active:scale-95 ">

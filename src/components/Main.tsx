@@ -1,17 +1,40 @@
-import {useArrayContext} from "../utils/ArrayProvider";
+import React from "react";
+import { useArrayContext } from "../utils/ArrayProvider";
 
-const Main = () => {
-    const {size,sortingAlgorithm} = useArrayContext()
+type MainProps = {
+  className?: string; // Make className optional
+};
+const Main: React.FC<MainProps> = ({ className }) => { 
+   const { size, array, } = useArrayContext();
+  //  const barWidth=100/size;
+  return (
+    <>
+    <div className={`flex w-full h-full items-end ${className}  `}>
+      {array.length > 0 ? (
+        array.map((value, index) => (
+          <div
+          key={`${value}-${index}`}
+          className="bg-emerald-600 max-w-56 "
+          style={{
+            height: `${(value / (20 * size)) * 100}%`, // Adjusted for better height calculation
+            // width: `${barWidth}%`, // Adjusted for better width calculation
+            flex: `1 1 ${100 / array.length}%`, // Makes bars responsive
+            margin: "0 1px", // Optional margin to space out the bars
+          }}
+          id={`${index}`}
+          >
+            <span className={`${array.length >= 50 ? 'hidden' : 'block'} text-white text-xs`}>
+              {value}
+            </span>
+          </div>
+        ))
+      ) : (
+        <p className="text-red-500 text-center w-full">No bars to display</p>
+      )}
+    </div>
+    {/* <p className="text-center text-white">{array.join()}</p> */}
+        </>
+  );
+};
 
-
-    return (
-        <div className="flex flex-row justify-center ">
-            <h1>{sortingAlgorithm}</h1>
-          {Array.from({ length: size }).map((_, i) => (
-            <div key={i} className="h-10 w-3 bg-blue-500 m-1"></div>
-          ))}
-        </div>
-      );
-    }
- 
 export default Main;
