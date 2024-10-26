@@ -14,6 +14,10 @@ const ArrayContext = createContext({
   setArray: (newArray: number[]) => {},
   sortType: 'Ascending' as SortType,
   setSortType: (sortType: SortType) => {},
+  sorted: false,
+  setSorted: (sorted: boolean) => {},
+  raing: false,
+  setRaining: (raining: boolean) => {},
 });
 
 export const useArrayContext = () => useContext(ArrayContext);
@@ -26,6 +30,8 @@ const ArrayProvider: React.FC<{ children: React.ReactNode }> = ({
   const [sortingAlgorithm,setSortingAlgorithm]=useState<SortingAlgorithm>('none')
   const [array,setArray]=useState<number[]>([])
   const [sortType,setSortType]=useState<SortType>('Ascending')
+  const [sorted,setSorted]=useState <boolean>(false)
+  const [raing,setRaining]=useState<boolean>(false)
 
   useEffect(()=>{
     const generateArray:() => void=()=>{
@@ -37,7 +43,7 @@ const ArrayProvider: React.FC<{ children: React.ReactNode }> = ({
 
 
   return (
-    <ArrayContext.Provider value={{ size, setSize, speed, setSpeed, sortingAlgorithm, setSortingAlgorithm,array,setArray,sortType,setSortType }}>      {children}
+    <ArrayContext.Provider value={{ size, setSize, speed, setSpeed, sortingAlgorithm, setSortingAlgorithm,array,setArray,sortType,setSortType,sorted,setSorted ,raing ,setRaining }}>      {children}
     </ArrayContext.Provider>
   );
 };

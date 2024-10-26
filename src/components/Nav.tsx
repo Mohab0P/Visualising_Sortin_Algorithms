@@ -13,13 +13,21 @@ const Nav: React.FC<NavProps> = ({ className }) => {
     sortingAlgorithm,
     setSortingAlgorithm,
     array,
-    setArray
+    setArray,
+    sorted,
+    setSorted,
+    raing,
+    setRaining,
+    sortType,
+    setSortType
   } = useArrayContext();
 
   const sort = () => {
     switch (sortingAlgorithm) {
       case "BubbleSort": {
-        const { dupBlocks, animArr } = BubbleSort(array);
+    
+        const { dupBlocks, animArr} = BubbleSort(array);
+
         animateDivs(dupBlocks, animArr, speed, setArray);
         break;
       }
@@ -134,7 +142,7 @@ const Nav: React.FC<NavProps> = ({ className }) => {
           type="range"
           name="Items_amount"
           id="Items_amount"
-          className="w-full max-w-xl py-3 "
+          className={`w-full max-w-xl py-3  `}
           defaultValue={50}
           min={1}
           max={250}

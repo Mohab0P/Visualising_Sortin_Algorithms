@@ -6,7 +6,7 @@ type MainProps = {
 };
 
 const Main: React.FC<MainProps> = ({ className }) => {
-  const { size, array } = useArrayContext();
+  const { size, array,sortingAlgorithm } = useArrayContext();
 
   return (
     <div className={`flex w-full h-full items-end ${className}`}>
@@ -14,7 +14,7 @@ const Main: React.FC<MainProps> = ({ className }) => {
         array.map((value, index) => (
           <div
             key={`${value}-${index}`}
-            className="bar bg-emerald-600"
+            className={`bar bg-emerald-600 ${sortingAlgorithm=="none"? 'hidden':'block'}`}
             style={{
               height: `${(value / (20 * size)) * 100}%`,
               flex: `1 1 ${100 / array.length}%`,
