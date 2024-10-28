@@ -137,7 +137,7 @@ const Nav: React.FC<NavProps> = ({ className }) => {
           Heap Sort
         </button>
     <div>
-      <label htmlFor="sortOrder" className="text-lg">
+      <label htmlFor="sortOrder" className="text-lg mr-2 text-white">
         Sort Order:
       </label>
       <select id="sortOrder" value={sortType} onChange={handleSortChange}>
@@ -145,9 +145,7 @@ const Nav: React.FC<NavProps> = ({ className }) => {
         <option value="<">Descending</option>
       </select>
 
-      <div className="mt-2">
-        <p>Selected Sort Type: {sortType === ">" ? "Ascending" : "Descending"}</p>
-      </div>
+
     </div>
         <button
           className="bg-emerald-600 hover:bg-emerald-800 text-white font-bold py-2 px-4 rounded text-xl underline  transition-all active:scale-95 "
