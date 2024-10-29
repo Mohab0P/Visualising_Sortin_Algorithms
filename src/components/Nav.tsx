@@ -3,6 +3,9 @@ import { useArrayContext } from "../utils/ArrayProvider";
 import { BubbleSort } from "../algorithms/BubbleSort";
 import animateDivs from "../utils/AnimateDivs";
 import {SelectionSort} from "../algorithms/SelectionSort";
+import {QuickSort} from "../algorithms/QuickSort";
+import {MergeSort} from "../algorithms/MergeSort";
+
 type NavProps = {
   className?: string; // Make className optional
 };
@@ -36,8 +39,7 @@ const Nav: React.FC<NavProps> = ({ className }) => {
     switch (sortingAlgorithm) {
       case "BubbleSort": {
     
-        const { dupBlocks, animArr,timeTaken} = BubbleSort(array,sortType);
-        setTimeTaken(timeTaken);
+        const { dupBlocks, animArr} = BubbleSort(array,sortType);
         animateDivs(dupBlocks, animArr, speed, setArray);
         break;
       }
@@ -47,12 +49,18 @@ const Nav: React.FC<NavProps> = ({ className }) => {
         animateDivs(dupBlocks, animArr, speed, setArray);
         break;
       }
-      case "MergeSort":
-        console.log("Merge Sort");
+      case "MergeSort":{
+        const { dupBlocks, animArr, timeTaken } = MergeSort(array);
+        setTimeTaken(timeTaken);
+        animateDivs(dupBlocks, animArr, speed, setArray);
+      }
         break;
-      case "QuickSort":
-        console.log("Quick Sort");
+      case "QuickSort":{
+
+        const { dupBlocks, animArr } = QuickSort(array);
+        animateDivs(dupBlocks, animArr, speed, setArray);
         break;
+      }
       case "HeapSort":
         console.log("Heap Sort");
         break;
@@ -145,7 +153,6 @@ const Nav: React.FC<NavProps> = ({ className }) => {
         <option value="<">Descending</option>
       </select>
 
-
     </div>
         <button
           className="bg-emerald-600 hover:bg-emerald-800 text-white font-bold py-2 px-4 rounded text-xl underline  transition-all active:scale-95 "
@@ -169,7 +176,7 @@ const Nav: React.FC<NavProps> = ({ className }) => {
           className={`w-full max-w-xl py-3  `}
           defaultValue={50}
           min={1}
-          max={250}
+          max={100}
           onChange={(e) => setSize(parseInt(e.target.value))}
         />
       </div>
@@ -203,3 +210,4 @@ const Nav: React.FC<NavProps> = ({ className }) => {
 };
 
 export default Nav;
+
