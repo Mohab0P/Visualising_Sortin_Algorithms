@@ -50,8 +50,7 @@ const Nav: React.FC<NavProps> = ({ className }) => {
         break;
       }
       case "MergeSort":{
-        const { dupBlocks, animArr, timeTaken } = MergeSort(array);
-        setTimeTaken(timeTaken);
+        const { dupBlocks, animArr} = MergeSort(array);
         animateDivs(dupBlocks, animArr, speed, setArray);
       }
         break;
